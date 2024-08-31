@@ -61,7 +61,7 @@ public class CustomerController {
     public ResponseEntity<Void> delteById(
         @PathVariable("customer-id") String customerId
     ){
-        customerService.delteById(customerId);
+        customerService.deleteById(customerId);
         return ResponseEntity.accepted().build();
     }
 

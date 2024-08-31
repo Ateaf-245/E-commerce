@@ -4,10 +4,12 @@ import com.ateaf.ecommerce.notification.NotificationProducer;
 import com.ateaf.ecommerce.notification.PaymentNotificationRequest;
 import com.ateaf.ecommerce.payment.requests.PaymentRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PaymentService {
 
     private final PaymentRepository repository;
@@ -17,6 +19,8 @@ public class PaymentService {
     public Integer createPayment(PaymentRequest request) {
 
         var payment = repository.save(mapper.toPayment(request));
+
+        log.info("About to send Payment Notification :: {}",request);
         notificationProducer.sendNotification(
                 new PaymentNotificationRequest(
                         request.orderReference(),

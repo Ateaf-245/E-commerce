@@ -3,6 +3,7 @@ package com.ateaf.ecommerce.customer;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import com.ateaf.ecommerce.exception.CustomerNotFoundException;
@@ -12,24 +13,26 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CustomerService {
 
     private final CustomerRepository repository;
-
     private final CustomerMapper mapper;
 
     public String createCustomer(CustomerRequest request) {
         var customer =  repository.save(mapper.toCustomer(request));
+        log.info("inserting new customer with name :: {}",customer.getFirstname());
         return customer.getId();
     }
 
     public void updateCustomer(CustomerRequest request) {
-       
+
         var customer = repository.findById(request.id())
             .orElseThrow(() -> new CustomerNotFoundException(
                 String.format("Cannot update customer:: No customer found with provided ID:: %s",request.id())
             ));
         mergeCustomer(customer, request);
+        log.info("updating customer entry :: {}",customer.getId());
         repository.save(customer);
             
     }
@@ -68,7 +71,8 @@ public class CustomerService {
                 ));
     }
 
-    public void delteById(String customerId) {
+    public void deleteById(String customerId) {
+        log.debug("Deleting customer with Id :: {}",customerId);
         repository.deleteById(customerId);
     }
 }

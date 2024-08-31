@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -18,6 +19,7 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class ProductService {
     
     private final productRepository repository;
@@ -25,6 +27,7 @@ public class ProductService {
     
     public Integer createProduct(ProductRequest request) {
         var product = mapper.toProduct(request);
+        log.info(" Adding new Product :: {}",product);
         return repository.save(product).getId();
     }
 
@@ -40,6 +43,8 @@ public class ProductService {
 
         // if both list length does not match error will be thrown
         if (productIds.size() != storedProducts.size()) {
+            log.error(" One or More Product Does not Exist ::  Request Product : {} and Available Product : {}",
+                    productIds.size(),storedProducts.size());
             throw new ProductPurchaseException("One or More Product Does not Exist");
         }
 
@@ -55,8 +60,9 @@ public class ProductService {
             var product  = storedProducts.get(i);
             var productRequest = storedRequest.get(i);
             
-            // check if we have enough quantity of the perticular product.
+            // check if we have enough quantity of the particular product.
             if (product.getAvailableQuantity() < productRequest.quantity()) {
+                log.error(" Insufficient stock for product with ID: "+product.getId());
                 throw new ProductPurchaseException("Insufficient stock for product with ID: "+product.getId());
             }
 
@@ -73,8 +79,11 @@ public class ProductService {
     public ProductResponse getProductById(Integer productId) {
        return repository.findById(productId)
             .map(mapper::toProductResponse)
-            .orElseThrow(()-> new EntityNotFoundException("Product not found withthe ID : " + productId)
-       );
+            .orElseThrow(()-> {
+                    log.error(" Product not found with the ID :  {}",productId);
+                    throw new EntityNotFoundException("Product not found with the ID : " + productId);
+                }
+            );
     }
 
     public List<ProductResponse> getProducts() {

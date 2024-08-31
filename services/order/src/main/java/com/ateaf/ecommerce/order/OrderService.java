@@ -42,8 +42,9 @@ public class OrderService {
 
         //purchase the products --> product-ms
         var purchasedProducts =  productClient.purchaseProducts(request.produts());
-
+        log.info(" Product availability checked");
         // persist order
+        log.info("Saving the order in the database :: {}", request);
         var order = repository.save(mapper.toOrder(request));
 
         for(PurchaseRequest purchaseRequest: request.produts()){
@@ -56,6 +57,7 @@ public class OrderService {
                 )  
             );
         }
+        log.info("Making Payment request");
         var paymentRequest = new PaymentRequest(
                 request.amount(),
                 request.payementMethod(),
@@ -80,13 +82,13 @@ public class OrderService {
     }
 
     public List<OrderResponse> findAll() {
-       return repository.findAll().stream()
+        return repository.findAll().stream()
                     .map(mapper::fromOrder)
                     .collect(Collectors.toList());
     }
 
     public OrderResponse findByOrderId(Integer orderId) {
-      return repository.findById(orderId)
+        return repository.findById(orderId)
                 .map(mapper::fromOrder)
                 .orElseThrow(()-> new BusinessException(
                     String.format("No order found with the provided ID : %d", orderId))
