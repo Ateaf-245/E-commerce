@@ -1,0 +1,83 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "OrderApplication",
+            "request": "launch",
+            "mainClass": "com.ateaf.ecommerce.OrderApplication"
+        },
+        {
+            "type": "java",
+            "name": "ProductApplication",
+            "request": "launch",
+            "mainClass": "com.ateaf.product.ProductApplication"
+        },
+        {
+            "type": "java",
+            "name": "TestConnection",
+            "request": "launch",
+            "mainClass": "com.ateaf.customer.TestConnection",
+            "projectName": "customer"
+        },
+        {
+            "type": "java",
+            "name": "TestConnection",
+            "request": "launch",
+            "mainClass": "TestConnection"
+        },
+        {
+            "type": "java",
+            "name": "test",
+            "request": "launch",
+            "mainClass": "test"
+        },
+        {
+            "type": "java",
+            "name": "CustomerApplication",
+            "request": "launch",
+            "mainClass": "com.ateaf.customer.CustomerApplication"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ConfigServerApplication<config-server>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.ateaf.config_server.ConfigServerApplication",
+            "projectName": "config-server",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=57821 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=config-server"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DiscoveryServerApplication<discovery-server>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.ateaf.discovery_server.DiscoveryServerApplication",
+            "projectName": "discovery-server",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=58216 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=discovery-server"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-CustomerApplication<customer>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.ateaf.customer.CustomerApplication",
+            "projectName": "customer",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ProductApplication<product>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.ateaf.product.ProductApplication",
+            "projectName": "product",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "files.associations": {
+        "*.yml": "yaml",
+        "*.yaml": "yaml",
+        "*.properties": "properties"
+    },
+    "editor.quickSuggestions": {
+        "other": "on",
+        "comments": "off",
+        "strings": "on"
+    },
+    "yaml.format.enable": true,
+    "yaml.validate": true,
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/howlowck/common-catalog-schema/main/schema-versions.json": "file:///c%3A/Users/Ateaf/Documents/Projects/e-commerce/services/config-server/src/main/resources/configurations/discovery-server.yml",
+        "https://json.schemastore.org/sourcehut-build-0.65.0.json": "file:///c%3A/Users/Ateaf/Documents/Projects/e-commerce/services/config-server/src/main/resources/configurations/customer-service.yml",
+        "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json": "file:///c%3A/Users/Ateaf/Documents/Projects/e-commerce/docker-compose.yml"
+    },
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "maven.view": "hierarchical",
+}

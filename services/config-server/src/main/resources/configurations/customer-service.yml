@@ -1,0 +1,19 @@
+server:
+  port: 8090
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/customer
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true;
+        ddl-auto: update
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+eureka:
+  client:
+    register-with-eureka: true
