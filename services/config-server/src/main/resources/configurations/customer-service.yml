@@ -4,16 +4,16 @@ server:
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/customer
-    username: postgres
+    username: root
     password: root
     driver-class-name: org.postgresql.Driver
   jpa:
+    hibernate:
+      ddl-auto: update
+    show_sql: true
     properties:
       hibernate:
-        show_sql: true;
-        ddl-auto: update
         dialect: org.hibernate.dialect.PostgreSQLDialect
-
 eureka:
   client:
     register-with-eureka: true
