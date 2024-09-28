@@ -1,8 +1,6 @@
 package com.ateaf.ecommerce.customer;
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,7 +16,8 @@ import lombok.Setter;
 public class Customer {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Integer id;
     private String firstname;
     private String lastname;
     private String email;

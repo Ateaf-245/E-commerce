@@ -19,7 +19,7 @@ public class CustomerService {
     private final CustomerRepository repository;
     private final CustomerMapper mapper;
 
-    public String createCustomer(CustomerRequest request) {
+    public Integer createCustomer(CustomerRequest request) {
         var customer =  repository.save(mapper.toCustomer(request));
         log.info("inserting new customer with name :: {}",customer.getFirstname());
         return customer.getId();
@@ -59,11 +59,11 @@ public class CustomerService {
                 .collect(Collectors.toList());
     }
 
-    public Boolean exitsById(String customerId) {
+    public Boolean exitsById(Integer customerId) {
         return repository.findById(customerId).isPresent();
     }
 
-    public CustomerResponse findById(String customerId) {
+    public CustomerResponse findById(Integer customerId) {
         return repository.findById(customerId)
                 .map(mapper::fromCustomer)
                 .orElseThrow(() -> new CustomerNotFoundException(
@@ -71,8 +71,15 @@ public class CustomerService {
                 ));
     }
 
-    public void deleteById(String customerId) {
-        log.debug("Deleting customer with Id :: {}",customerId);
-        repository.deleteById(customerId);
+    public boolean deleteById(Integer customerId) {
+
+        boolean exist = repository.existsById(customerId);
+        if(exist){
+            log.info("Deleting customer with Id :: {}",customerId);
+            repository.deleteById(customerId);
+            return true;
+        }
+        log.error("Customer with Id : {} does not exits",customerId);
+        return false;
     }
 }

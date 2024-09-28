@@ -1,7 +1,7 @@
 package com.ateaf.ecommerce.customer;
 
 public record CustomerResponse(
-    String id,
+    Integer id,
     
     String firstname,
 
