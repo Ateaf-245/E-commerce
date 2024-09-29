@@ -3,6 +3,3 @@ spring:
     name: product-server
   config:
     import: optional:configserver:http://localhost:8888
-
-
-

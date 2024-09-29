@@ -3,4 +3,3 @@ spring:
     name: order-server
   config:
     import: optional:configserver:http://localhost:8888
-
