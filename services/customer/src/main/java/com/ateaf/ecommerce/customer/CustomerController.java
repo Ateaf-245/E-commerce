@@ -24,45 +24,45 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping
-    public ResponseEntity<String> createCustomer(
-        @RequestBody @Valid CustomerRequest request
-    ){
+    public ResponseEntity<Integer> createCustomer(
+            @RequestBody @Valid CustomerRequest request
+    ) {
         return ResponseEntity.ok(customerService.createCustomer(request));
     }
 
     @PutMapping
     public ResponseEntity<Void> updateCustomer(
-        @RequestBody @Valid CustomerRequest request
-    ){
+            @RequestBody @Valid CustomerRequest request
+    ) {
         customerService.updateCustomer(request);
         return ResponseEntity.accepted().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<CustomerResponse>> findAll(){
+    public ResponseEntity<List<CustomerResponse>> findAll() {
         return ResponseEntity.ok(customerService.findAllCustomers());
     }
 
-    @GetMapping("/exits/{customer-id}")
+    @GetMapping("/exists/{customer-id}")
     public ResponseEntity<Boolean> exitsById(
-        @PathVariable("customer-id") String customerId
-    ){
+            @PathVariable("customer-id") Integer customerId
+    ) {
         return ResponseEntity.ok(customerService.exitsById(customerId));
     }
 
     @GetMapping("/{customer-id}")
     public ResponseEntity<CustomerResponse> findById(
-        @PathVariable("customer-id") String customerId
-    ){
+            @PathVariable("customer-id") Integer customerId
+    ) {
         return ResponseEntity.ok(customerService.findById(customerId));
     }
 
     @DeleteMapping("/{customer-id}")
-    public ResponseEntity<Void> delteById(
-        @PathVariable("customer-id") String customerId
-    ){
-        customerService.deleteById(customerId);
-        return ResponseEntity.accepted().build();
+    public ResponseEntity<Boolean> deleteById(
+            @PathVariable("customer-id") Integer customerId
+    ) {
+        boolean status = customerService.deleteById(customerId);
+        return ResponseEntity.accepted().body(status);
     }
 
 }
